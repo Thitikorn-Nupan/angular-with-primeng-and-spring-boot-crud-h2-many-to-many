@@ -34,6 +34,13 @@ public class ActorController {
         return ResponseEntity.ok(actorDTO.findAll());
     }
 
+    // *** select actors that is not in movie id (in actor service)
+    // ex, selectAllNotInWhere?uniqSubValue=M003
+    @GetMapping(value = "/selectAllNotInWhere",params = "uniqSubValue")
+    protected ResponseEntity<List<Actor>> selectAllNotInWhere(String uniqSubValue) {
+        return ResponseEntity.ok(actorDTO.findAllNotInWhere(uniqSubValue));
+    }
+
     // ex, selectAllOnlyColumn?name=born
     @GetMapping(value = "/selectAllOnlyColumn",params = "name") // if you don't need to use @RequestParam you can set params name on @GetMapping instead
     protected ResponseEntity<List<Actor>> selectAllOnlyColumn(String name) {
@@ -53,14 +60,14 @@ public class ActorController {
 
 
     @PostMapping(value = "/saveOne")
-    protected ResponseEntity<Boolean> save(@RequestBody Actor actor) {
+    protected ResponseEntity<Boolean> saveOne(@RequestBody Actor actor) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(actorDTO.saveModel(actor) > 0);
     }
 
     @PutMapping(value = "/editOne")
-    protected ResponseEntity<Boolean> edit(@RequestBody Actor actor) {
+    protected ResponseEntity<Boolean> editOne(@RequestBody Actor actor) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(actorDTO.editModelByPk(actor) > 0);

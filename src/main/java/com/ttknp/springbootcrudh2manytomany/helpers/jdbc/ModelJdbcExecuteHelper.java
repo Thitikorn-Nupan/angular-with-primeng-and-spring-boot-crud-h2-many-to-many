@@ -15,6 +15,7 @@ public abstract class ModelJdbcExecuteHelper<T> {
 
     // Reads
     public abstract List<T> findAll();
+    public abstract List<T> findAllNotInWhere(String uniqSubKey);
     public abstract <U> List<U> findAllOnlyColumn(String columnName);
     public abstract <U> T findOneIncludeRelation(U pk);
     public abstract <U> T findOneByPk(U pk);
