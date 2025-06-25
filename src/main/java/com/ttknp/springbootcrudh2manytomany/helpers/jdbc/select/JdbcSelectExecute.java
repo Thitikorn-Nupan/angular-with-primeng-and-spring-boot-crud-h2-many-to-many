@@ -53,6 +53,38 @@ public class JdbcSelectExecute<T> {
         return executeQuery(stringBuilder.toString() , new BeanPropertyRowMapper<>(aBeanClass) ,null);
     }
 
+    public <T,S,TS> List<T> selectAllWhereNotIn(Class<T> aBeanClass,Class<S> aSubBeanClass, Class<TS> aRelationBeanClass, String uniqKeyMain, String uniqKeySub,  Object uniqSubValue) {
+        /*
+            Expect.
+            select *
+            from H2_SCHOOL.ACTORS as a
+            where a.AID not in (
+                select a.AID
+                from H2_SCHOOL.MOVIES as m
+                join H2_SCHOOL.ACTORS_MOVIES as a_m
+                on m.MID = a_m.MID
+                join H2_SCHOOL.ACTORS as a
+                on a.AID = a_m.AID
+                where a_m.MID = 'M002'
+        )*/
+        StringBuilder stringBuilder = new StringBuilder()
+                .append(SQLSyntaxService.SELECT_START) // select *
+                .append(jdbcCommonService.getSchemaAndTableNameOnTableAnnotation(aBeanClass)+" m") // m = actor
+                .append(" WHERE m."+uniqKeyMain +" NOT IN ( ") // m.AID
+                // Subquery
+                .append(SQLSyntaxService.SELECT)
+                .append(" m."+uniqKeyMain) // m.AID
+                .append(" FROM "+jdbcCommonService.getSchemaAndTableNameOnTableAnnotation(aSubBeanClass)+" s")
+                .append(" JOIN "+jdbcCommonService.getSchemaAndTableNameOnTableAnnotation(aRelationBeanClass)+" r")
+                .append(" ON r."+uniqKeySub+" = s."+uniqKeySub)
+                .append(" JOIN "+jdbcCommonService.getSchemaAndTableNameOnTableAnnotation(aBeanClass)+" m")
+                .append(" ON r."+uniqKeyMain+" = m."+uniqKeyMain)
+                .append(" WHERE r."+uniqKeySub)
+                .append(SQLSyntaxService.ASSIGN_EQUAL)
+                .append(")");
+        return executeQuery(stringBuilder.toString() , new BeanPropertyRowMapper<>(aBeanClass) ,uniqSubValue);
+    }
+
     public <U> List<U> selectAllOnlyColumn(Class<T> aBeanClass, Class<U> aTypeClass, String columnName ) { // U can be only String , Integer , ... anything but should not be Object
         StringBuilder stringBuilder = new StringBuilder()
                 .append(SQLSyntaxService.SELECT)

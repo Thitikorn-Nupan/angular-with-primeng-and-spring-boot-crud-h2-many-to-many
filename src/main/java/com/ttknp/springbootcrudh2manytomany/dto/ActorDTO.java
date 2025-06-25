@@ -24,6 +24,12 @@ public class ActorDTO extends ModelJdbcExecuteHelper<Actor> {
         return jdbcSelectExecute.selectAll(Actor.class);
     }
 
+    // *** select actors that is not in movie id (in actor service)
+    @Override
+    public List<Actor> findAllNotInWhere(String uniqSubKey) {
+        return jdbcSelectExecute.selectAllWhereNotIn(Actor.class, Movie.class, ActorMovie.class,"aid","mid", uniqSubKey);
+    }
+
     @Override
     public <U> List<U> findAllOnlyColumn(String columnName) {
         // new switch case
@@ -90,7 +96,6 @@ public class ActorDTO extends ModelJdbcExecuteHelper<Actor> {
     private Integer countAllRelationByPk(String pk) {
         return jdbcSelectExecute.selectCount(ActorMovie.class, "aid",pk);
     }
-
 
     private static class ActorJoinMoviesResultSetExtractor implements ResultSetExtractor<Actor> {
         @Override
