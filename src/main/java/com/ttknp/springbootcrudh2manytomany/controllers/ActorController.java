@@ -43,7 +43,7 @@ public class ActorController {
 
     // ex, selectAllOnlyColumn?name=born
     @GetMapping(value = "/selectAllOnlyColumn",params = "name") // if you don't need to use @RequestParam you can set params name on @GetMapping instead
-    protected ResponseEntity<List<Actor>> selectAllOnlyColumn(String name) {
+    protected ResponseEntity<List<Object>> selectAllOnlyColumn(String name) {
         return ResponseEntity.ok(actorDTO.findAllOnlyColumn(name));
     }
 
@@ -59,6 +59,9 @@ public class ActorController {
     }
 
 
+
+
+
     @PostMapping(value = "/saveOne")
     protected ResponseEntity<Boolean> saveOne(@RequestBody Actor actor) {
         return ResponseEntity
@@ -66,12 +69,17 @@ public class ActorController {
                 .body(actorDTO.saveModel(actor) > 0);
     }
 
+
+
+
     @PutMapping(value = "/editOne")
     protected ResponseEntity<Boolean> editOne(@RequestBody Actor actor) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(actorDTO.editModelByPk(actor) > 0);
     }
+
+
 
 
     @DeleteMapping(value = "/deleteOneByPk",params = "aid")

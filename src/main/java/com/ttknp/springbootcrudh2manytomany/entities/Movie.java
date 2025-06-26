@@ -2,6 +2,7 @@ package com.ttknp.springbootcrudh2manytomany.entities;
 
 import com.ttknp.springbootcrudh2manytomany.custom_annotations.IgnoreGenerateSQL;
 import lombok.*;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.math.BigDecimal;
@@ -18,6 +19,7 @@ public class Movie {
     private String title;
     private String categories;
     private BigDecimal rate;
+    @Column("`year`") // it's bug when create seem like "year" it about syntax
     private LocalDate year;
     @IgnoreGenerateSQL
     private Set<Actor> actors;
