@@ -135,6 +135,19 @@ public class JdbcSelectExecute<T> {
         return executeQueryForObject(stringBuilder.toString(),Integer.class,uniqValue);
     }
 
+    public Integer selectCount( Class<T> aBeanClass , String uniqColumnName,String uniqSubColumnName, Object ...params) {
+        StringBuilder stringBuilder = new StringBuilder()
+                .append(SQLSyntaxService.SELECT_COUNT)
+                .append(jdbcCommonService.getSchemaAndTableNameOnTableAnnotation(aBeanClass))
+                .append(" where ")
+                .append(uniqColumnName)
+                .append(SQLSyntaxService.ASSIGN_EQUAL)
+                .append(" and ")
+                .append(uniqSubColumnName)
+                .append(SQLSyntaxService.ASSIGN_EQUAL);
+        return executeQueryForObject(stringBuilder.toString(),Integer.class,params);
+    }
+
     public Integer selectCount( Class<T> aBeanClass ) {
         StringBuilder stringBuilder = new StringBuilder()
                 .append(SQLSyntaxService.SELECT_COUNT)
