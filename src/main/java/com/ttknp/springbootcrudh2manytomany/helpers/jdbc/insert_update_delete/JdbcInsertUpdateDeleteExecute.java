@@ -183,4 +183,18 @@ public class JdbcInsertUpdateDeleteExecute<T> {
         return executeUpdate(stringBuilderSQL.toString(),uniqValue);
     }
 
+    public Integer deleteOne(Class<T> aBeanClass, String uniqColumnName, String uniqSubColumnName,Object ...params) throws IllegalAccessException {
+        StringBuilder stringBuilderSQL = new StringBuilder()
+                .append(SQLSyntaxService.DELETE)
+                .append(jdbcCommonService.getSchemaAndTableNameOnTableAnnotation(aBeanClass))
+                .append(" where ")
+                .append(uniqColumnName)
+                .append(SQLSyntaxService.ASSIGN_EQUAL)
+                .append(" and ")
+                .append(uniqSubColumnName)
+                .append(SQLSyntaxService.ASSIGN_EQUAL);
+        log.debug("sql delete = {}", stringBuilderSQL.toString());
+        return executeUpdate(stringBuilderSQL.toString(),params);
+    }
+
 }
