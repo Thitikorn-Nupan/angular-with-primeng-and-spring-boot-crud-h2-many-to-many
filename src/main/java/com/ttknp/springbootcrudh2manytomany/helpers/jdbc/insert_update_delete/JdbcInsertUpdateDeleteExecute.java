@@ -150,7 +150,16 @@ public class JdbcInsertUpdateDeleteExecute<T> {
 
 
         for (Field field : fields) {
-            String fieldName = field.getName();
+            String fieldName;
+            Column columnAnnotation = null;
+            if (field.isAnnotationPresent(Column.class)) {
+                columnAnnotation = field.getAnnotation(Column.class);
+            }
+            if (columnAnnotation != null) { // check if property name (POJO) it's not the same column name (Field Table)
+                fieldName = columnAnnotation.value();  // columnAnnotation => @org.springframework.data.relational.core.mapping.Column("full_name") columnAnnotation.value() =>  full_name
+            } else {
+                fieldName = field.getName();
+            }
             Object fieldValue;
             if (uniqColumnName.equals(fieldName)) {
                 field.setAccessible(true); // **** Make the field accessible if it's private

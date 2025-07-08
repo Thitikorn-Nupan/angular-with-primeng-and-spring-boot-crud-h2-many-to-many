@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = {"http://localhost:4200","http://thitkorn-nupan.com"})
 @Slf4j
 @CommonRestAPI(configPath = {"/actor","/actors"})
 public class ActorController {
