@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = {"http://localhost:4200","http://thitkorn-nupan.com"})
 @Slf4j
 @CommonRestAPI(configPath = {"/movie","/movies"})
 public class MovieController {
@@ -28,7 +29,7 @@ public class MovieController {
     }
 
     // *** select actors that is not in movie id (in actor service)
-    // ex, selectAllNotInWhere?uniqSubValue=M003
+    // ex, selectAllNotInWhere?uniqSubValue=A003
     @GetMapping(value = "/selectAllNotInWhere",params = "uniqSubValue")
     protected ResponseEntity<List<Movie>> selectAllNotInWhere(String uniqSubValue) {
         return ResponseEntity.ok(movieDTO.findAllNotInWhere(uniqSubValue));
