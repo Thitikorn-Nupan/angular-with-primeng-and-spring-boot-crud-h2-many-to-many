@@ -31,6 +31,11 @@ public class MovieDTO extends ModelJdbcExecuteHelper<Movie> {
         return jdbcSelectExecute.selectAllWhereNotIn(Movie.class, Actor.class, ActorMovie.class,"mid","aid", uniqSubKey);
     }
 
+    public List<String> findAllOnlyColumnNotInWhere(String uniqSubKey) {
+        return jdbcSelectExecute.selectAllOnlyColumnWhereNotIn(Movie.class, Actor.class, ActorMovie.class,String.class,"mid","aid","mid", uniqSubKey);
+
+    }
+
     @Override
     public <U> List<U> findAllOnlyColumn(String columnName) {
         Class<?> typeClass = switch (columnName) {

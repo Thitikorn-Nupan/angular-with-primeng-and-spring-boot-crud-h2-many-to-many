@@ -93,6 +93,26 @@ public class JdbcSelectExecute<T> {
         return executeQueryForList(stringBuilder.toString(), aTypeClass,null);
     }
 
+    public <T,S,TS,U> List<U> selectAllOnlyColumnWhereNotIn(Class<T> aBeanClass,Class<S> aSubBeanClass, Class<TS> aRelationBeanClass, Class<U> aTypeClass, String uniqKeyMain, String uniqKeySub,  String uniqColumName,Object uniqSubValue) {
+        StringBuilder stringBuilder = new StringBuilder()
+                .append(SQLSyntaxService.SELECT)
+                .append(uniqColumName + " from ")
+                .append(jdbcCommonService.getSchemaAndTableNameOnTableAnnotation(aBeanClass)+" m") // m = actor
+                .append(" WHERE m."+uniqKeyMain +" NOT IN ( ") // m.AID
+                // Subquery
+                .append(SQLSyntaxService.SELECT)
+                .append(" m."+uniqKeyMain) // m.AID
+                .append(" FROM "+jdbcCommonService.getSchemaAndTableNameOnTableAnnotation(aSubBeanClass)+" s")
+                .append(" JOIN "+jdbcCommonService.getSchemaAndTableNameOnTableAnnotation(aRelationBeanClass)+" r")
+                .append(" ON r."+uniqKeySub+" = s."+uniqKeySub)
+                .append(" JOIN "+jdbcCommonService.getSchemaAndTableNameOnTableAnnotation(aBeanClass)+" m")
+                .append(" ON r."+uniqKeyMain+" = m."+uniqKeyMain)
+                .append(" WHERE r."+uniqKeySub)
+                .append(SQLSyntaxService.ASSIGN_EQUAL)
+                .append(")");
+        return executeQueryForList(stringBuilder.toString() ,aTypeClass ,uniqSubValue);
+    }
+
 
 
 

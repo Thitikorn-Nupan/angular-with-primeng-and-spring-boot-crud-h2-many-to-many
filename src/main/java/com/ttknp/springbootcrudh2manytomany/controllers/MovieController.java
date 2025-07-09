@@ -35,6 +35,11 @@ public class MovieController {
         return ResponseEntity.ok(movieDTO.findAllNotInWhere(uniqSubValue));
     }
 
+    @GetMapping(value = "/selectAllOnlyColumnNotInWhere",params = "uniqSubValue")
+    protected ResponseEntity<List<String>> selectAllOnlyColumnNotInWhere(String uniqSubValue) {
+        return ResponseEntity.ok(movieDTO.findAllOnlyColumnNotInWhere(uniqSubValue));
+    }
+
     // ex, selectAllOnlyColumn?name=born
     @GetMapping(value = "/selectAllOnlyColumn",params = "name") // if you don't need to use @RequestParam you can set params name on @GetMapping instead
     protected ResponseEntity<List<Object>> selectAllOnlyColumn(String name) {
