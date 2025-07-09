@@ -1499,3 +1499,9 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: B:/practice-java
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:81)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 104 more
+2025-07-09 23:21:34.836536+07:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "CONTACT CHARACTER VARYING(10)": "'011623510795555555555555555555' (30)"; SQL statement:
+update H2_SCHOOL.ACTORS set full_name= ? ,born= ? ,contact= ?  where aid= ? [22001-232]
+2025-07-09 23:24:44.579196+07:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "RATE DECIMAL(2, 1)": "59599959596.3 (12)"; SQL statement:
+update H2_SCHOOL.MOVIES set title= ? ,categories= ? ,rate= ? ,`year`= ?  where mid= ? [22001-232]

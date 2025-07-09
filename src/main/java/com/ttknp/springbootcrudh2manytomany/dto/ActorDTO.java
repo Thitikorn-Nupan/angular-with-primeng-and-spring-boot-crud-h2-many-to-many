@@ -3,6 +3,7 @@ package com.ttknp.springbootcrudh2manytomany.dto;
 import com.ttknp.springbootcrudh2manytomany.entities.Actor;
 import com.ttknp.springbootcrudh2manytomany.entities.ActorMovie;
 import com.ttknp.springbootcrudh2manytomany.entities.Movie;
+import com.ttknp.springbootcrudh2manytomany.exception.ContentNotAllowed;
 import com.ttknp.springbootcrudh2manytomany.helpers.jdbc.ModelJdbcExecuteHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -57,8 +58,8 @@ public class ActorDTO extends ModelJdbcExecuteHelper<Actor> {
     public Integer saveModel(Actor model) {
         try {
             return jdbcInsertUpdateDeleteExecute.insertOne(Actor.class,model);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            throw new ContentNotAllowed(e);
         }
     }
 
@@ -66,8 +67,8 @@ public class ActorDTO extends ModelJdbcExecuteHelper<Actor> {
     public Integer editModelByPk(Actor model) {
         try {
             return jdbcInsertUpdateDeleteExecute.updateOne(Actor.class,"aid",model);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            throw new ContentNotAllowed(e);
         }
     }
 
@@ -79,15 +80,15 @@ public class ActorDTO extends ModelJdbcExecuteHelper<Actor> {
             try {
                 rowAffected = jdbcInsertUpdateDeleteExecute.deleteOne(ActorMovie.class,"aid",pk);
                 log.debug("Removed {} relation",rowAffected);
-            } catch (IllegalAccessException e) {
-                throw new RuntimeException(e);
+            } catch (Exception e) {
+                throw new ContentNotAllowed(e);
             }
         }
         try {
             rowAffected = jdbcInsertUpdateDeleteExecute.deleteOne(Actor.class,"aid",pk);
             log.debug("Removed {} by pk",rowAffected);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            throw new ContentNotAllowed(e);
         }
         return rowAffected;
     }

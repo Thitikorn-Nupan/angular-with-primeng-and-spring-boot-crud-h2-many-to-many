@@ -1,6 +1,7 @@
 package com.ttknp.springbootcrudh2manytomany.dto;
 
 import com.ttknp.springbootcrudh2manytomany.entities.ActorMovie;
+import com.ttknp.springbootcrudh2manytomany.exception.ContentNotAllowed;
 import com.ttknp.springbootcrudh2manytomany.helpers.jdbc.ModelJdbcExecuteHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -45,12 +46,13 @@ public class ActorMovieDTO extends ModelJdbcExecuteHelper<ActorMovie> {
             log.debug("can insert");
             try {
                 rowAffected = jdbcInsertUpdateDeleteExecute.insertOne(ActorMovie.class,model);
-            } catch (IllegalAccessException e) {
-                throw new RuntimeException(e);
+            } catch (Exception e) {
+                throw new ContentNotAllowed(e);
             }
         } else {
             // log.debug("can not insert");
-            throw new RuntimeException("can not insert aid has mid");
+            Exception exception = new RuntimeException("can not insert aid has mid");
+            throw new ContentNotAllowed(exception);
         }
         return rowAffected;
     }
@@ -72,8 +74,8 @@ public class ActorMovieDTO extends ModelJdbcExecuteHelper<ActorMovie> {
     public Integer removeModelByPkAndSubPk(String pk,String subPk) {
         try {
             return jdbcInsertUpdateDeleteExecute.deleteOne(ActorMovie.class, "aid", "mid", pk, subPk);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            throw new ContentNotAllowed(e);
         }
     }
 }
