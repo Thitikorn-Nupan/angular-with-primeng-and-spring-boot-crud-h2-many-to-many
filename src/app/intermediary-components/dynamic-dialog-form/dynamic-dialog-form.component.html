@@ -1,0 +1,50 @@
+<div> <!--class="card flex justify-center"-->
+  <!-- button for showing -->
+  <!--<p-button (click)="showDialog()" [label]="label"/>-->
+  <p-dialog [header]="formTitle"
+            [draggable]="draggable"
+            [modal]="true"
+            [(visible)]="visible"
+            [style]="{ width: '25rem' }"
+            [resizable]="resizable"
+            [closable]="true"
+            (onHide)="getCloseEventFormGroup()"> <!-- (onHide) is event of close (X) button -->
+    <ng-container  [formGroup]="formGroup">
+      <div class="field-row">
+        <ng-container  *ngFor="let dialogKeyFilter of dynamicDialogFields">
+          <div class="field-column"> <!-- flex items-center gap-4 mb-4 -->
+            <label [for]="dialogKeyFilter.id" class="font-semibold w-24">{{dialogKeyFilter.label}}</label>
+            <!-- if you can't bind some attr of html tag try wrapping by [()] -->
+            <input pInputText
+                   [formControlName]="dialogKeyFilter.formControlName!"
+                   [id]="dialogKeyFilter.id"
+                   class="flex-auto" autocomplete="off"
+                   [placeholder]="dialogKeyFilter.placeholder"
+                   [pKeyFilter]="dialogKeyFilter.pKeyFilter"
+                   [attr.type]="dialogKeyFilter.type"
+                   [style]="{'width':'100%'}"
+                   [readOnly]="dialogKeyFilter.readOnly"
+            />
+          </div>
+        </ng-container>
+      </div>
+    </ng-container>
+    <ng-template pTemplate="footer">  <!-- class="flex justify-end gap-2"-->
+        <button
+          pButton
+          pRipple
+          label="Submit"
+          class="p-button-secondary"
+          (click)="getSubmitEventFormGroup()">
+        </button>
+        <button
+          pButton
+          pRipple
+          label="Clear"
+          class="p-button-secondary"
+          (click)="getClearEventFormGroup()">
+        </button>
+    </ng-template>
+
+  </p-dialog>
+</div>

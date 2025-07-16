@@ -1,0 +1,17 @@
+.centered-form {
+  margin: 60px auto;
+  width: 800px;
+  padding: 10px;
+}
+
+.centered-list {
+  margin: 0px auto;
+  width: 300px;
+  padding: 10px;
+}
+
+.centered-table {
+  margin: 60px auto;
+  width: 1200px;
+  padding: 10px;
+}

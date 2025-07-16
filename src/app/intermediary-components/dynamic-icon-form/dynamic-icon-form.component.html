@@ -1,0 +1,135 @@
+<p-card [header]="formTitle" [formGroup]="formGroup" [style]="{'padding':'10px' , 'max-width':'800px'}">
+  <div class="container">
+
+    <div class="field-row">
+      <ng-container *ngFor="let dynamicIconFormKeyFilter of dynamicIconFields">
+        <!--
+          at p-inputgroup have to component
+          1. icon
+          2. input field
+        -->
+        <p-inputGroup>
+
+          <!-- **************** icon **************** -->
+          <ng-container *ngIf="dynamicIconFormKeyFilter.isIconExist !== null"> <!-- if not null -->
+
+            <!-- if true case icon exist -->
+            <ng-container *ngIf="dynamicIconFormKeyFilter.isIconExist">
+              <p-inputGroupAddon>
+                <i [attr.class]="dynamicIconFormKeyFilter.icon"></i>
+              </p-inputGroupAddon>
+            </ng-container>
+
+            <!-- if false case icon didn't exist-->
+            <ng-container *ngIf="!dynamicIconFormKeyFilter.isIconExist">
+              <p-inputGroupAddon>
+                {{ dynamicIconFormKeyFilter.icon }}
+              </p-inputGroupAddon>
+            </ng-container>
+
+          </ng-container>
+          <!-- **************** icon **************** -->
+
+
+          <!-- **************** input **************** -->
+          <ng-container>
+
+            <!-- normal key filter case no dropdown-->
+            <ng-container *ngIf="dynamicIconFormKeyFilter.isInputDate === null && dynamicIconFormKeyFilter.isInputText && dynamicIconFormKeyFilter.pKeyFilter !== undefined && dynamicIconFormKeyFilter.isTextarea === null && dynamicIconFormKeyFilter.isDropdown === null  && dynamicIconFormKeyFilter.isCheckbox === null && dynamicIconFormKeyFilter.isRadio === null">
+              <input
+                pInputText
+                [placeholder]="dynamicIconFormKeyFilter.placeholder!"
+                [formControlName]="dynamicIconFormKeyFilter.formControlName!"
+                [attr.id]="dynamicIconFormKeyFilter.id"
+                [pKeyFilter]="dynamicIconFormKeyFilter.pKeyFilter"
+                [readOnly]="dynamicIconFormKeyFilter.isReadOnly"
+                [style]="{'width':'100%'}"
+              />
+            </ng-container>
+
+            <!-- *** new case input date -->
+            <ng-container *ngIf=" dynamicIconFormKeyFilter.isInputDate && dynamicIconFormKeyFilter.isInputText === null && dynamicIconFormKeyFilter.pKeyFilter !== undefined && dynamicIconFormKeyFilter.isTextarea === null && dynamicIconFormKeyFilter.isDropdown === null  && dynamicIconFormKeyFilter.isCheckbox === null && dynamicIconFormKeyFilter.isRadio === null">
+              <!-- default format is yy-mm-dd -->
+              <input
+                pInputText
+                type="date"
+                [formControlName]="dynamicIconFormKeyFilter.formControlName!"
+                [attr.id]="dynamicIconFormKeyFilter.id"
+                [readOnly]="dynamicIconFormKeyFilter.isReadOnly"
+                [style]="{'width':'100%'}"
+              />
+            </ng-container>
+
+            <!-- case textarea -->
+            <ng-container *ngIf="dynamicIconFormKeyFilter.isInputDate === null && dynamicIconFormKeyFilter.isInputText === null && dynamicIconFormKeyFilter.pKeyFilter === undefined && dynamicIconFormKeyFilter.isTextarea && dynamicIconFormKeyFilter.isDropdown === null  && dynamicIconFormKeyFilter.isCheckbox === null && dynamicIconFormKeyFilter.isRadio === null">
+             <textarea
+               pInputTextarea
+               [placeholder]="dynamicIconFormKeyFilter.placeholder!"
+               [formControlName]="dynamicIconFormKeyFilter.formControlName!"
+               [attr.id]="dynamicIconFormKeyFilter.id"
+               rows="5">
+             </textarea>
+            </ng-container>
+
+            <!-- case dropdown primeng 17 -->
+            <ng-container *ngIf="dynamicIconFormKeyFilter.isInputDate === null && dynamicIconFormKeyFilter.isInputText === null && dynamicIconFormKeyFilter.pKeyFilter === undefined && dynamicIconFormKeyFilter.isTextarea === null && dynamicIconFormKeyFilter.isDropdown  && dynamicIconFormKeyFilter.isCheckbox === null && dynamicIconFormKeyFilter.isRadio === null">
+              <p-treeSelect
+                [placeholder]="dynamicIconFormKeyFilter.placeholder!"
+                [formControlName]="dynamicIconFormKeyFilter.formControlName!"
+                [attr.id]="dynamicIconFormKeyFilter.id"
+                [options]="dynamicIconFormKeyFilter.isDropdown!"
+                [containerStyle]="{'width':'auto'}"
+              />
+            </ng-container>
+
+            <!-- case checkbox -->
+            <ng-container *ngIf="dynamicIconFormKeyFilter.isInputDate === null && dynamicIconFormKeyFilter.isInputText === null && dynamicIconFormKeyFilter.pKeyFilter === undefined && dynamicIconFormKeyFilter.isTextarea === null && dynamicIconFormKeyFilter.isDropdown === null  && dynamicIconFormKeyFilter.isCheckbox && dynamicIconFormKeyFilter.isRadio === null">
+              <ng-container *ngFor="let option of dynamicIconFormKeyFilter.isCheckbox.options">
+                <!-- when click it gets [value] -->
+                <p-checkbox [inputId]="option.key"
+                            [value]="option"
+                            [name]="dynamicIconFormKeyFilter.formControlName!"
+                            [formControlName]="dynamicIconFormKeyFilter.formControlName!"/>
+                <label [for]="option.key">{{ option.name }}</label>
+              </ng-container>
+            </ng-container>
+
+            <!-- case radio -->
+            <ng-container *ngIf="dynamicIconFormKeyFilter.isInputDate === null && dynamicIconFormKeyFilter.isInputText === null && dynamicIconFormKeyFilter.pKeyFilter === undefined && dynamicIconFormKeyFilter.isTextarea === null && dynamicIconFormKeyFilter.isDropdown === null  && dynamicIconFormKeyFilter.isCheckbox  === null && dynamicIconFormKeyFilter.isRadio">
+              <ng-container *ngFor="let option of dynamicIconFormKeyFilter.isRadio.options">
+                <p-radioButton
+                  [inputId]="option.key"
+                  [value]="option"
+                  [formControlName]="dynamicIconFormKeyFilter.formControlName!"/>
+                <label [for]="option.key">{{ option.name }}</label>
+              </ng-container>
+            </ng-container>
+
+          </ng-container>
+          <!-- **************** input **************** -->
+
+        </p-inputGroup>
+
+      </ng-container>
+    </div>
+
+
+    <p-inputGroup>
+      <button
+        pButton
+        pRipple
+        label="Submit"
+        class="p-button-secondary"
+        (click)="getSubmitEventFormGroup()">
+      </button>
+      <button
+        pButton
+        pRipple
+        label="Clear"
+        class="p-button-secondary"
+        (click)="getClearEventFormGroup()">
+      </button>
+    </p-inputGroup>
+
+  </div>
+</p-card>

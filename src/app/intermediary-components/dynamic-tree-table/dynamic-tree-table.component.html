@@ -1,0 +1,74 @@
+<p-card [header]="tableTitle">
+  <p-treeTable #treeTable
+               [attr.id]="id"
+               [value]="data"
+               [columns]="headerColumns"
+               [scrollable]="scrollable"
+               [loading]="loading"
+               [paginator]="paginator"
+               [rows]="rowsScope"
+               [tableStyle]="{'padding':'10px' , 'max-width':'100%'}">
+    <!-- header table -->
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <ng-container *ngFor="let colum of columns; let i = index; let last = last">
+          <!-- last it means get last value element -->
+          <th
+            [ttSortableColumn]="colum.field"> <!-- as action sort -->
+            {{ colum.header }}
+            <!--
+              no last can sort
+              or
+              last can sort but disableMode is true
+            -->
+            <p-treeTableSortIcon *ngIf="!last || (last && disableMode)" [field]="colum.field"/>
+          </th>
+        </ng-container>
+      </tr>
+    </ng-template>
+
+    <!-- body table all the vars it's default no need to modify if you wanna change do in on ts. file-->
+    <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
+      <tr [ttRow]="rowNode">
+        <ng-container *ngFor="let col of columns; let i = index; let last = last">
+          <td>
+            <p-treeTableToggler *ngIf="!last && i == 0" [rowNode]="rowNode"></p-treeTableToggler> <!-- as icon -->
+            {{ rowData[col.field] }} <!-- as data each column -->
+            <ng-container *ngIf="last && !disableMode">
+              <!-- if current colum.filed is 'action' key add this container -->
+              <p-inputGroup >
+                <ng-container *ngIf="defaultOptionalAction">
+                  <button
+                    pButton
+                    pRipple
+                    icon="pi pi-wrench"
+                    class="p-button-secondary"
+                    (click)="getEditEventTreeTable(rowData)">
+                  </button>
+                  <button
+                    pButton
+                    pRipple
+                    icon="pi pi-minus"
+                    class="p-button-secondary"
+                    (click)="getRemoveEventTreeTable(rowData)">
+                  </button>
+                </ng-container>
+                <ng-container *ngIf="optionalAction">
+                  <button
+                    pButton
+                    pRipple
+                    icon="pi pi-list"
+                    class="p-button-secondary"
+                    (click)="getOptionalEventTreeTable(rowData)">
+                  </button>
+                </ng-container>
+              </p-inputGroup>
+            </ng-container>
+          </td>
+        </ng-container>
+      </tr>
+    </ng-template>
+
+  </p-treeTable>
+
+</p-card>

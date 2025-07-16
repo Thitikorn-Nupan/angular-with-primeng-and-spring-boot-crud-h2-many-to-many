@@ -1,0 +1,89 @@
+<div class="centered-table">
+  <dynamic-tree-table
+    [tableTitle]="tableTitle"
+    [id]="id"
+    [loading]="loading"
+    [scrollable]="scrollable"
+    [paginator]="paginator"
+    [rowsScope]="rowsScope"
+    [data]="data"
+    [headerColumns]="headerColumns"
+    [optionalAction]="true"
+    (getData)="setInitialData($event)"
+    (editEvent)="setEditEventTreeTable($event)"
+    (removeEvent)="setRemoveEventTreeTable($event)"
+    (optionalEvent)="setOptionalEventTreeTable($event)">
+  </dynamic-tree-table>
+</div>
+
+
+<ng-container *ngIf="data">
+  <div class="centered-form">
+    <div class="centered-list">
+      <p-listbox
+        [filterPlaceHolder]="'Search AID'"
+        [options]="actorsId"
+        [filter]="true"
+        [style]="{ width: '15rem' }"
+        [listStyle]="{'max-height': '220px'}"/>
+    </div>
+    <dynamic-icon-form
+      [formGroup]="formGroupCreate"
+      [formTitle]="formTitleCreate"
+      [dynamicIconFields]="dynamicIconFields"
+      (getFormGroup)=" setInitialFormGroupCreate($event)"
+      (submitEvent)=" setSubmitEventFormGroupCreate()"
+      (clearEvent)=" setClearEventFormGroupCreate()">
+    </dynamic-icon-form>
+  </div>
+</ng-container>
+
+
+<ng-container *ngIf="formGroupUpdate"> <!-- Form Update ** Optional ng container -->
+  <dynamic-dialog-confirm-form
+    [formGroup]="formGroupUpdate"
+    [formTitle]="formTitleUpdate"
+    [visible]="visibleFormUpdate"
+    [draggable]="draggableFormUpdate"
+    [resizable]="resizableFormUpdate"
+    [dynamicDialogFields]="dynamicDialogFields"
+    (getFormGroup)="setInitialFormGroupUpdate($event)"
+    (submitEvent)="setSubmitEventFormGroupUpdate()"
+    (clearEvent)="setClearEventFormGroupUpdate()"
+    (closeEvent)="setCloseEventFormGroupUpdate()">
+  </dynamic-dialog-confirm-form>
+</ng-container>
+
+
+<!-- [modal]="true" is mean backgroud as bur-->
+<ng-container *ngIf="visibleSubTable">
+  <p-dialog
+    [header]="tableTitleSubTable"
+    [modal]="true"
+    [(visible)]="visibleSubTable"
+    [style]="{ width: '100rem' }">
+    <dynamic-tree-table
+      [id]="idSubTable"
+      [loading]="loadingSubTable"
+      [scrollable]="scrollableSubTable"
+      [paginator]="paginatorSubTable"
+      [rowsScope]="rowsScopeSubTable"
+      [data]="dataSubTable"
+      [disableMode]="true"
+      [headerColumns]="headerColumnsSubTable"
+      (getData)="setInitialDataSubTable($event)">
+    </dynamic-tree-table>
+  </p-dialog>
+</ng-container>
+
+
+<ng-container *ngIf="dynamicDialogConfirm"> <!-- Dialog Confirm ** Optional ng container  -->
+  <dynamic-dialog-confirm
+    [visible]="visibleConfirm"
+    [draggable]="draggableConfirm"
+    [resizable]="resizableConfirm"
+    [dynamicDialogConfirm]="dynamicDialogConfirm"
+    (okEvent)="setOkEventDialogConfirm()"
+    (closeEvent)="setCloseEventDialogConfirm()">
+  </dynamic-dialog-confirm>
+</ng-container>
