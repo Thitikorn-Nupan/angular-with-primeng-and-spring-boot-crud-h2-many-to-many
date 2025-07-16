@@ -1505,3 +1505,24 @@ update H2_SCHOOL.ACTORS set full_name= ? ,born= ? ,contact= ?  where aid= ? [220
 2025-07-09 23:24:44.579196+07:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLDataException: Value too long for column "RATE DECIMAL(2, 1)": "59599959596.3 (12)"; SQL statement:
 update H2_SCHOOL.MOVIES set title= ? ,categories= ? ,rate= ? ,`year`= ?  where mid= ? [22001-232]
+2025-07-10 09:58:40.360025+07:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FULL_NAME CHARACTER VARYING(55)": "'Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' (56)"; SQL statement:
+insert into H2_SCHOOL.ACTORS (aid ,full_name ,born ,contact ) values (? ,? ,? ,? ) [22001-232]
+2025-07-10 09:59:44.275330+07:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FULL_NAME CHARACTER VARYING(55)": "'PPPPPPPPPPPPPPPPPPPPPPPPpppppppppppppppppppppppppPPPPPPPPPPPPPPPPPPPPPPPPpppppp... (245)"; SQL statement:
+insert into H2_SCHOOL.ACTORS (aid ,full_name ,born ,contact ) values (? ,? ,? ,? ) [22001-232]
+2025-07-10 10:00:38.234470+07:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FULL_NAME CHARACTER VARYING(55)": "'messagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessageme... (119)"; SQL statement:
+insert into H2_SCHOOL.ACTORS (aid ,full_name ,born ,contact ) values (? ,? ,? ,? ) [22001-232]
+2025-07-10 10:01:36.064630+07:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FULL_NAME CHARACTER VARYING(55)": "'PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP... (140)"; SQL statement:
+insert into H2_SCHOOL.ACTORS (aid ,full_name ,born ,contact ) values (? ,? ,? ,? ) [22001-232]
+2025-07-10 10:02:20.331767+07:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FULL_NAME CHARACTER VARYING(55)": "'Aaron MotenAaron MotenAaron MotenAaron MotenAaron MotenAaron MotenAaron MotenAa... (143)"; SQL statement:
+update H2_SCHOOL.ACTORS set full_name= ? ,born= ? ,contact= ?  where aid= ? [22001-232]
+2025-07-10 10:04:23.648290+07:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "TITLE CHARACTER VARYING(55)": "'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa... (136)"; SQL statement:
+insert into H2_SCHOOL.MOVIES (mid ,title ,categories ,rate ,`year` ) values (? ,? ,? ,? ,? ) [22001-232]
+2025-07-10 10:04:35.209061+07:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "TITLE CHARACTER VARYING(55)": "'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa... (170)"; SQL statement:
+update H2_SCHOOL.MOVIES set title= ? ,categories= ? ,rate= ? ,`year`= ?  where mid= ? [22001-232]
