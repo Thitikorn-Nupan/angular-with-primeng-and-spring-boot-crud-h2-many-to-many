@@ -9,6 +9,7 @@ import {DynamicIconField} from "../../intermediary-entities/dynamic-icon-field";
 import {UsefulHelper} from "../../helpers/useful-helper";
 import {DynamicDialogField} from "../../intermediary-entities/dynamic-dialog-field";
 import {DynamicDialogConfirm} from "../../intermediary-entities/dynamic-dialog-confirm";
+// Not done
 
 @Component({
   selector: 'app-to-do-movie',
@@ -17,6 +18,7 @@ import {DynamicDialogConfirm} from "../../intermediary-entities/dynamic-dialog-c
 })
 export class ToDoMovieComponent implements OnInit, AfterViewInit {
 
+  // Model
   protected moviesId!: string []
   protected movies! : Movie[]
   protected movieEvent! : Movie
@@ -30,7 +32,7 @@ export class ToDoMovieComponent implements OnInit, AfterViewInit {
   public loading!: boolean
   public scrollable: boolean = true
   public paginator: boolean = true
-  public rowsScope: number = 3
+  public rowsScope: number = 5
 
 
   // Sub Table
@@ -42,7 +44,7 @@ export class ToDoMovieComponent implements OnInit, AfterViewInit {
   public loadingSubTable!: boolean
   public scrollableSubTable: boolean = true
   public paginatorSubTable: boolean = true
-  public rowsScopeSubTable: number = 3
+  public rowsScopeSubTable: number = 5
 
   // Form Create
   public formGroupCreate!: FormGroup;
@@ -56,7 +58,6 @@ export class ToDoMovieComponent implements OnInit, AfterViewInit {
   public draggableFormUpdate: boolean = false;
   public resizableFormUpdate: boolean = false;
   public dynamicDialogFields!: DynamicDialogField[]
-
 
   // Dialog
   public visibleConfirm: boolean = false;
@@ -92,16 +93,15 @@ export class ToDoMovieComponent implements OnInit, AfterViewInit {
     switch (this.modeDialog) {
       case 'DELETE':
         const mid = this.movieEvent.mid
-        // console.log(mid)
-        /*this.actorHttpService.deleteDeleteOneByPk(aid).subscribe(res => {
+        this.movieHttpService.deleteDeleteOneByPk(mid).subscribe(res => {
           if (res) {
-            this.reloadActors()
-            this.reloadActorsId()
+            this.reloadMovies()
+            this.reloadMoviesId()
             this.setupTable()
           }
         }, (error) => {
           console.error(error)
-        })*/
+        })
         break;
     }
     this.visibleConfirm = false
@@ -134,7 +134,7 @@ export class ToDoMovieComponent implements OnInit, AfterViewInit {
             'font-size': '1.3rem'
           },
           'warn',
-          'Duplicate AID',
+          'Duplicate MID',
           'Please generate another primary key'
         )
         break;
@@ -146,7 +146,7 @@ export class ToDoMovieComponent implements OnInit, AfterViewInit {
             'font-size': '1.3rem'
           },
           'warn',
-          'Duplicate AID',
+          'Duplicate MID',
           content!
         )
         break;
@@ -184,7 +184,6 @@ export class ToDoMovieComponent implements OnInit, AfterViewInit {
   }
 
   protected setEditEventTreeTable($event: Movie) {
-
     this.formGroupUpdate.patchValue({
       mid: $event.mid,
       title: $event.title,
@@ -192,7 +191,6 @@ export class ToDoMovieComponent implements OnInit, AfterViewInit {
       rate: $event.rate,
       year: $event.year
     } )
-
     this.visibleFormUpdate = true
   }
 
@@ -243,7 +241,6 @@ export class ToDoMovieComponent implements OnInit, AfterViewInit {
 
   protected setInitialFormGroupUpdate($event: FormGroup) {
     this.formGroupUpdate = $event
-    // console.log(this.formGroupUpdate)
   }
 
   protected setSubmitEventFormGroupUpdate() {

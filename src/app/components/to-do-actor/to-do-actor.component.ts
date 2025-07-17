@@ -31,7 +31,7 @@ export class ToDoActorComponent implements OnInit, AfterViewInit {
   public loading!: boolean
   public scrollable: boolean = true
   public paginator: boolean = true
-  public rowsScope: number = 3
+  public rowsScope: number = 5
 
 
   // Sub Table
@@ -43,7 +43,7 @@ export class ToDoActorComponent implements OnInit, AfterViewInit {
   public loadingSubTable!: boolean
   public scrollableSubTable: boolean = true
   public paginatorSubTable: boolean = true
-  public rowsScopeSubTable: number = 3
+  public rowsScopeSubTable: number = 5
 
 
   // Form Create

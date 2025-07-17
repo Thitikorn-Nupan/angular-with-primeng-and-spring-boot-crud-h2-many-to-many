@@ -2,13 +2,14 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Actor} from "../entities/actor";
 import {Movie} from "../entities/movie";
+import {environment} from "../../environments/environment.development";
 
 @Injectable({
   providedIn: 'root'
 })
 export class MovieHttpService {
 
-  private readonly baseEndpoint: string = 'http://localhost:8080/api/movie';
+  private readonly baseEndpoint: string = environment.baseUrl+'/movie';
 
   constructor(private http: HttpClient) {}
 
@@ -40,6 +41,9 @@ export class MovieHttpService {
     return this.http.post<boolean>(this.baseEndpoint+'/saveOne',movie)
   }
 
+  public deleteDeleteOneByPk(mid : string) {
+    return this.http.delete<boolean>(this.baseEndpoint+'/deleteOneByPk?mid='+mid)
+  }
   /*public getSelectOneByPk(aid : string) {
     return this.http.get<Actor>(this.baseEndpoint+'/selectOneByPk?aid='+aid)
   }

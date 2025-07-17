@@ -2,13 +2,15 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Actor} from "../entities/actor";
 import {ActorMovie} from "../entities/actor-movie";
+import {environment} from "../../environments/environment.development";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ActorMovieHttpService {
 
-  private readonly baseEndpoint: string = 'http://localhost:8080/api/actorMovie';
+  private readonly baseEndpoint: string = environment.baseUrl+'/actorMovie';
+
 
   constructor(private http: HttpClient) {
   }
