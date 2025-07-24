@@ -69,8 +69,7 @@ export class ToDoActorComponent implements OnInit, AfterViewInit {
   private modeDialog!: 'DELETE' | 'SUBMIT' | 'WARN'
 
 
-  constructor(private actorHttpService: ActorHttpService) {
-  }
+  constructor(private actorHttpService: ActorHttpService) {}
 
 
   ngAfterViewInit(): void {

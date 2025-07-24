@@ -1,7 +1,5 @@
 <p-card [header]="formTitle" [formGroup]="formGroup" [style]="{'padding':'10px' , 'max-width':'800px'}">
-  <div class="container">
-
-    <div class="field-row">
+  <div class="card flex flex-column md:flex-column gap-3">
       <ng-container *ngFor="let dynamicIconFormKeyFilter of dynamicIconFields">
         <!--
           at p-inputgroup have to component
@@ -111,9 +109,8 @@
         </p-inputGroup>
 
       </ng-container>
-    </div>
-
-
+  </div>
+  <div class="mt-3">
     <p-inputGroup>
       <button
         pButton
@@ -130,6 +127,5 @@
         (click)="getClearEventFormGroup()">
       </button>
     </p-inputGroup>
-
   </div>
 </p-card>

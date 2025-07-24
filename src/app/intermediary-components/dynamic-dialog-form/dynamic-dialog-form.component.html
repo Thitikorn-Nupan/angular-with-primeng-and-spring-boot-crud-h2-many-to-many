@@ -1,4 +1,4 @@
-<div> <!--class="card flex justify-center"-->
+<div class="card flex justify-content-center"><!--class="card flex justify-center"-->
   <!-- button for showing -->
   <!--<p-button (click)="showDialog()" [label]="label"/>-->
   <p-dialog [header]="formTitle"
@@ -12,13 +12,14 @@
     <ng-container  [formGroup]="formGroup">
       <div class="field-row">
         <ng-container  *ngFor="let dialogKeyFilter of dynamicDialogFields">
-          <div class="field-column"> <!-- flex items-center gap-4 mb-4 -->
-            <label [for]="dialogKeyFilter.id" class="font-semibold w-24">{{dialogKeyFilter.label}}</label>
+          <div class="flex align-items-center gap-3 mb-3"><!-- flex items-center gap-4 mb-4 -->
+            <label [for]="dialogKeyFilter.id" class="p-text-secondary block w-2">{{dialogKeyFilter.label}}</label>
             <!-- if you can't bind some attr of html tag try wrapping by [()] -->
             <input pInputText
+                   class="flex-auto"
                    [formControlName]="dialogKeyFilter.formControlName!"
                    [id]="dialogKeyFilter.id"
-                   class="flex-auto" autocomplete="off"
+                   autocomplete="off"
                    [placeholder]="dialogKeyFilter.placeholder"
                    [pKeyFilter]="dialogKeyFilter.pKeyFilter"
                    [attr.type]="dialogKeyFilter.type"

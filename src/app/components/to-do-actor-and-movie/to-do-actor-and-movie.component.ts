@@ -68,7 +68,6 @@ export class ToDoActorAndMovieComponent implements OnInit ,AfterViewInit {
   ngOnInit(): void {
     this.setDialogConfirm()
     this.setupFormGroupCreate()
-    // this.setupFormGroupUpdate()
     this.reloadActors()
   }
 
@@ -212,8 +211,6 @@ export class ToDoActorAndMovieComponent implements OnInit ,AfterViewInit {
       const mid = values['mid']
       this.movieHttpService.getSelectOnlyMidsAllNotInAid(aid).subscribe(res => {
         if (res.indexOf(mid) !== -1) { // -1 is not found
-          // console.log('can insert')
-
           const actorMovie = new ActorMovie()
           actorMovie.mid = mid
           actorMovie.aid = aid
@@ -224,9 +221,6 @@ export class ToDoActorAndMovieComponent implements OnInit ,AfterViewInit {
           }, (errorResponse) => { // case invalid field
             this.dynamicDialogConfirm = this.getDynamicDialogConfirm('WARN_SQL',errorResponse['error']['message'])
           })
-
-
-
         } else {
           this.dynamicDialogConfirm = this.getDynamicDialogConfirm('WARN')
         }
