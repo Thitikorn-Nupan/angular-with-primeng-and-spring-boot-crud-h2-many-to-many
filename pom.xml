@@ -11,8 +11,8 @@
     <groupId>com.ttknp</groupId>
     <artifactId>spring-boot-crud-h2-many-to-many</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>spring-boot-crud-h2-many-to-many-for-angular-with-primeng</name>
-    <description>spring-boot-crud-h2-many-to-many-for-angular-with-primeng</description>
+    <name>spring-boot-crud-h2-many-to-many-for-angular-with-primeng-or-bootstrap</name>
+    <description>spring-boot-crud-h2-many-to-many-for-angular-with-primeng-or-bootstrap</description>
     <url/>
     <licenses>
         <license/>
