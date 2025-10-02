@@ -11,7 +11,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @Setter
 @NoArgsConstructor
 @ToString
-@Table(schema = "H2_SCHOOL",name = "ACTORS_MOVIES")
+@Table(schema = SchemaAndTable.SCHEMA ,name = SchemaAndTable.AM)
 public class ActorMovie {
 
     private String aid;

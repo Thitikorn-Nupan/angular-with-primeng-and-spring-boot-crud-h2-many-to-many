@@ -12,7 +12,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @ToString
-@Table(schema = "H2_SCHOOL",name = "ACTORS")
+@Table(schema = SchemaAndTable.SCHEMA ,name = SchemaAndTable.A)
 public class Actor {
 
     private String aid;
