@@ -7,5 +7,4 @@ public class ContentNotAllowed extends RuntimeException {
         super(exception.getMessage(), exception);
     }
 
-
 }

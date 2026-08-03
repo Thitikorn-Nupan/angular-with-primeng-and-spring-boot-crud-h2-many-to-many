@@ -3,7 +3,6 @@ package com.ttknp.springbootcrudh2manytomany.helpers.jdbc;
 import com.ttknp.springbootcrudh2manytomany.helpers.jdbc.insert_update_delete.JdbcInsertUpdateDeleteExecute;
 import com.ttknp.springbootcrudh2manytomany.helpers.jdbc.select.JdbcSelectExecute;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.List;
 
 public abstract class ModelJdbcExecuteHelper<T> {

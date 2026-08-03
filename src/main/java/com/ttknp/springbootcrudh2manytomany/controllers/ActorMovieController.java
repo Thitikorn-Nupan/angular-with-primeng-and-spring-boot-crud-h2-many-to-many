@@ -26,9 +26,7 @@ public class ActorMovieController {
 
     @PostMapping(value = "/saveOne")
     protected ResponseEntity<Boolean> saveOne(@RequestBody ActorMovie actorMovie) {
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(actorMovieDTO.saveModel(actorMovie) > 0);
+        return ResponseEntity.status(HttpStatus.CREATED).body(actorMovieDTO.saveModel(actorMovie) > 0);
     }
 
     @DeleteMapping(value = "/deleteOneByPkAndPk",params = {"aid","mid"})

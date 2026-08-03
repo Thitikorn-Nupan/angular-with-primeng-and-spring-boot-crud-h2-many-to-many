@@ -8,7 +8,6 @@ import com.ttknp.springbootcrudh2manytomany.helpers.jdbc.ModelJdbcExecuteHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Service;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -105,7 +104,6 @@ public class ActorDTO extends ModelJdbcExecuteHelper<Actor> {
             Set<Movie> movieAsSet = new HashSet<>(); // Note set won't cut the duplicate object if you forget set Override equals() and hashCode() on your POJOs
 
             while (rs.next()) {
-
                 actor.setAid(rs.getString("aid"));
                 actor.setFullName(rs.getString("full_name"));
                 actor.setBorn(LocalDate.parse(rs.getString("born")));
@@ -124,6 +122,5 @@ public class ActorDTO extends ModelJdbcExecuteHelper<Actor> {
             return actor;
         }
     }
-
 
 }

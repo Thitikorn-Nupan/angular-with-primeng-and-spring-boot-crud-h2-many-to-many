@@ -5,7 +5,6 @@ import com.ttknp.springbootcrudh2manytomany.exception.ContentNotAllowed;
 import com.ttknp.springbootcrudh2manytomany.helpers.jdbc.ModelJdbcExecuteHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Slf4j

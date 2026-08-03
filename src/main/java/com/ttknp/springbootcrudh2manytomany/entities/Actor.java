@@ -4,7 +4,6 @@ import com.ttknp.springbootcrudh2manytomany.custom_annotations.IgnoreGenerateSQL
 import lombok.*;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
-
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -29,6 +28,5 @@ public class Actor {
         this.born = born;
         this.contact = contact;
     }
-
 
 }

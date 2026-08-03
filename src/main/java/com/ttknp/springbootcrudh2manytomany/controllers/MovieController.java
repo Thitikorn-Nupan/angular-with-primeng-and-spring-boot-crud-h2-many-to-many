@@ -2,14 +2,12 @@ package com.ttknp.springbootcrudh2manytomany.controllers;
 
 import com.ttknp.springbootcrudh2manytomany.custom_annotations.CommonRestAPI;
 import com.ttknp.springbootcrudh2manytomany.dto.MovieDTO;
-import com.ttknp.springbootcrudh2manytomany.entities.Actor;
 import com.ttknp.springbootcrudh2manytomany.entities.Movie;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @CrossOrigin(origins = {"http://localhost:4200","http://thitkorn-nupan.com"})
@@ -57,9 +55,6 @@ public class MovieController {
         return ResponseEntity.ok(movieDTO.findOneIncludeRelation(mid));
     }
 
-
-
-
     @PostMapping(value = "/saveOne")
     protected ResponseEntity<Boolean> saveOne(@RequestBody Movie movie) {
         return ResponseEntity
@@ -67,18 +62,12 @@ public class MovieController {
                 .body(movieDTO.saveModel(movie) > 0);
     }
 
-
-
-
     @PutMapping(value = "/editOne")
     protected ResponseEntity<Boolean> editOne(@RequestBody Movie movie) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(movieDTO.editModelByPk(movie) > 0);
     }
-
-
-
 
     @DeleteMapping(value = "/deleteOneByPk",params = "mid")
     protected ResponseEntity<Boolean> deleteOneByPk(String mid) {

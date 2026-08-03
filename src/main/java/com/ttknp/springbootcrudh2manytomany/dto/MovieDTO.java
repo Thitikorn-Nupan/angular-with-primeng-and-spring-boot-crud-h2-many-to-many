@@ -8,7 +8,6 @@ import com.ttknp.springbootcrudh2manytomany.helpers.jdbc.ModelJdbcExecuteHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Service;
-
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,7 +19,6 @@ import java.util.Set;
 @Slf4j
 @Service
 public class MovieDTO extends ModelJdbcExecuteHelper<Movie> {
-
 
     @Override
     public List<Movie> findAll() {
@@ -34,7 +32,6 @@ public class MovieDTO extends ModelJdbcExecuteHelper<Movie> {
 
     public List<String> findAllOnlyColumnNotInWhere(String uniqSubKey) {
         return jdbcSelectExecute.selectAllOnlyColumnWhereNotIn(Movie.class, Actor.class, ActorMovie.class,String.class,"mid","aid","mid", uniqSubKey);
-
     }
 
     @Override
@@ -111,7 +108,6 @@ public class MovieDTO extends ModelJdbcExecuteHelper<Movie> {
             Set<Actor> actorAsSet = new HashSet<>(); // Note set won't cut the duplicate object if you forget set Override equals() and hashCode() on your POJOs
 
             while (rs.next()) {
-
                 movie.setMid(rs.getString("mid"));
                 movie.setTitle(rs.getString("title"));
                 movie.setCategories(rs.getString("categories"));
