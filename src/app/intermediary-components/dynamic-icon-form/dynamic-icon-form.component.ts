@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormGroup} from "@angular/forms";
 import {DynamicIconField} from "../../intermediary-entities/dynamic-icon-field";
 
-
 @Component({
   selector: 'dynamic-icon-form',
   templateUrl: './dynamic-icon-form.component.html',
@@ -32,11 +31,11 @@ export class DynamicIconFormComponent implements OnInit {
     this.getFormGroup.emit(this.formGroup);
   }
 
-  protected getSubmitEventFormGroup() {
+  protected getSubmitEventFormGroup() : void  {
     this.submitEvent?.emit();
   }
 
-  protected getClearEventFormGroup() {
+  protected getClearEventFormGroup() : void  {
     this.clearEvent?.emit();
   }
 }

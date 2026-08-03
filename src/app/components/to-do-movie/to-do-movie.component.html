@@ -16,7 +16,6 @@
   </dynamic-tree-table>
 </div>
 
-
 <ng-container *ngIf="data">
   <div class="centered-form">
     <div class="centered-list">
@@ -38,7 +37,6 @@
   </div>
 </ng-container>
 
-
 <ng-container *ngIf="formGroupUpdate"> <!-- Form Update ** Optional ng container -->
   <dynamic-dialog-confirm-form
     [formGroup]="formGroupUpdate"
@@ -53,7 +51,6 @@
     (closeEvent)="setCloseEventFormGroupUpdate()">
   </dynamic-dialog-confirm-form>
 </ng-container>
-
 
 <ng-container *ngIf="visibleSubTable">
   <p-dialog
@@ -74,7 +71,6 @@
     </dynamic-tree-table>
   </p-dialog>
 </ng-container>
-
 
 <ng-container *ngIf="dynamicDialogConfirm"> <!-- Dialog Confirm ** Optional ng container  -->
   <dynamic-dialog-confirm

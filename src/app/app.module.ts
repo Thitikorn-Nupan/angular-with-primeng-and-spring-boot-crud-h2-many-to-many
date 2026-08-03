@@ -23,14 +23,12 @@ import {KeyFilterModule} from "primeng/keyfilter";
 import {InputTextModule} from "primeng/inputtext";
 import {InputGroupAddonModule} from "primeng/inputgroupaddon";
 import {InputTextareaModule} from "primeng/inputtextarea";
-import { CalendarModule } from 'primeng/calendar';
+import {CalendarModule} from 'primeng/calendar';
 import {ListboxModule} from "primeng/listbox";
 import {DynamicDialogFormComponent} from "./intermediary-components/dynamic-dialog-form/dynamic-dialog-form.component";
 import {DialogModule} from "primeng/dialog";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {
-  DynamicDialogConfirmComponent
-} from "./intermediary-components/dynamic-dialog-confirm/dynamic-dialog-confirm.component";
+import {DynamicDialogConfirmComponent} from "./intermediary-components/dynamic-dialog-confirm/dynamic-dialog-confirm.component";
 
 @NgModule({
   declarations: [

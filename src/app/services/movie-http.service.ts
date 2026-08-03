@@ -1,49 +1,51 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Actor} from "../entities/actor";
 import {Movie} from "../entities/movie";
 import {environment} from "../../environments/environment.development";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class MovieHttpService {
 
-  private readonly baseEndpoint: string = environment.baseUrl+'/movie';
+  private readonly baseEndpoint: string = environment.baseUrl + '/movie';
 
-  constructor(private http: HttpClient) {}
-
-  public getSelectAll() {
-    return this.http.get<Movie[]>(this.baseEndpoint+'/selectAll')
+  constructor(private readonly http: HttpClient) {
   }
 
-  public getSelectAllNotInAid(aid:string) {
-    return this.http.get<Movie[]>(this.baseEndpoint+`/selectAllNotInWhere?uniqSubValue=${aid}`)
+  public getSelectAll(): Observable<Movie[]> {
+    return this.http.get<Movie[]>(this.baseEndpoint + '/selectAll')
   }
 
-  public getSelectOnlyMidsAllNotInAid(aid:string) {
-    return this.http.get<string[]>(this.baseEndpoint+`/selectAllOnlyColumnNotInWhere?uniqSubValue=${aid}`)
+  public getSelectAllNotInAid(aid: string): Observable<Movie[]> {
+    return this.http.get<Movie[]>(this.baseEndpoint + `/selectAllNotInWhere?uniqSubValue=${aid}`)
   }
 
-  public getSelectAllMids() {
-    return this.http.get<string[]>(this.baseEndpoint+'/selectAllOnlyColumn?name=mid')
+  public getSelectOnlyMidsAllNotInAid(aid: string): Observable<string[]> {
+    return this.http.get<string[]>(this.baseEndpoint + `/selectAllOnlyColumnNotInWhere?uniqSubValue=${aid}`)
   }
 
-  public getSelectOneIncludeRelationByPk(mid : string) {
-    return this.http.get<Movie>(this.baseEndpoint+'/selectOneIncludeRelationByPk?mid='+mid)
+  public getSelectAllMids(): Observable<string[]> {
+    return this.http.get<string[]>(this.baseEndpoint + '/selectAllOnlyColumn?name=mid')
   }
 
-  public putEditOne(movie: Movie) {
-    return this.http.put<boolean>(this.baseEndpoint+'/editOne',movie)
+  public getSelectOneIncludeRelationByPk(mid: string): Observable<Movie> {
+    return this.http.get<Movie>(this.baseEndpoint + '/selectOneIncludeRelationByPk?mid=' + mid)
   }
 
-  public postSaveOne(movie: Movie) {
-    return this.http.post<boolean>(this.baseEndpoint+'/saveOne',movie)
+  public putEditOne(movie: Movie): Observable<boolean> {
+    return this.http.put<boolean>(this.baseEndpoint + '/editOne', movie)
   }
 
-  public deleteDeleteOneByPk(mid : string) {
-    return this.http.delete<boolean>(this.baseEndpoint+'/deleteOneByPk?mid='+mid)
+  public postSaveOne(movie: Movie): Observable<boolean> {
+    return this.http.post<boolean>(this.baseEndpoint + '/saveOne', movie)
   }
+
+  public deleteDeleteOneByPk(mid: string): Observable<boolean> {
+    return this.http.delete<boolean>(this.baseEndpoint + '/deleteOneByPk?mid=' + mid)
+  }
+
   /*public getSelectOneByPk(aid : string) {
     return this.http.get<Actor>(this.baseEndpoint+'/selectOneByPk?aid='+aid)
   }

@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   // Menu
   protected menuItems! : MenuItem[]
 
-  constructor(private router: Router) {}
+  constructor(private readonly router: Router) {}
 
   ngOnInit(): void {
     this.menuItems = [
@@ -70,8 +70,8 @@ export class AppComponent implements OnInit {
     ]
   }
 
-  private onMenuClick(event: MenuItemCommandEvent) {
-    let path = ''
+  private onMenuClick(event: MenuItemCommandEvent) : void {
+    let path : string = ''
     switch (event.item?.label) {
       case 'Home':
         path = '/';

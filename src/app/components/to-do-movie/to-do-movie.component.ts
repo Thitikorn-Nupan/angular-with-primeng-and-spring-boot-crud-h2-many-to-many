@@ -17,7 +17,6 @@ import {DynamicDialogConfirm} from "../../intermediary-entities/dynamic-dialog-c
   styleUrl: './to-do-movie.component.css'
 })
 export class ToDoMovieComponent implements OnInit, AfterViewInit {
-
   // Model
   protected moviesId!: string []
   protected movies! : Movie[]
@@ -66,7 +65,7 @@ export class ToDoMovieComponent implements OnInit, AfterViewInit {
   public dynamicDialogConfirm! : DynamicDialogConfirm
   private modeDialog! : 'DELETE' | 'SUBMIT'| 'WARN'
 
-  constructor(private movieHttpService: MovieHttpService) {}
+  constructor(private readonly movieHttpService: MovieHttpService) {}
 
   ngAfterViewInit(): void {
     this.setupTable()
@@ -82,14 +81,14 @@ export class ToDoMovieComponent implements OnInit, AfterViewInit {
 
 
   // Dialog Confirm
-  private setDialogConfirm() {
+  private setDialogConfirm() : void {
     this.visibleConfirm = false;
     this.draggableConfirm = false;
     this.resizableConfirm = false;
     this.dynamicDialogConfirm = new DynamicDialogConfirm()
   }
 
-  protected setOkEventDialogConfirm() {
+  protected setOkEventDialogConfirm() : void {
     switch (this.modeDialog) {
       case 'DELETE':
         const mid = this.movieEvent.mid
@@ -107,12 +106,12 @@ export class ToDoMovieComponent implements OnInit, AfterViewInit {
     this.visibleConfirm = false
   }
 
-  protected setCloseEventDialogConfirm() {
+  protected setCloseEventDialogConfirm() : void {
     this.visibleConfirm = false
   }
 
-  private getDynamicDialogConfirm(mode: 'DELETE' | 'CREATE' | 'UPDATE' | 'WARN'| 'WARN_SQL' | 'INVALID' ,content?:string) {
-    let dynamicDialogConfirm = new DynamicDialogConfirm()
+  private getDynamicDialogConfirm(mode: 'DELETE' | 'CREATE' | 'UPDATE' | 'WARN'| 'WARN_SQL' | 'INVALID' ,content?:string) : DynamicDialogConfirm {
+    const dynamicDialogConfirm = new DynamicDialogConfirm()
     switch (mode) {
       case 'DELETE':
         dynamicDialogConfirm.setDialogConfirm(
@@ -169,21 +168,21 @@ export class ToDoMovieComponent implements OnInit, AfterViewInit {
   }
 
   // Table
-  private setupTable() {
+  private setupTable() : void {
     setTimeout(() => { // have to delay for waiting actors
       this.loading = false
-      let actorsFormat: { data: Movie, subData: Movie [] | null } [] = []
+      const actorsFormat: { data: Movie, subData: Movie [] | null } [] = []
       this.movies.forEach(movie => (actorsFormat.push({data: movie, subData: null})) )
       this.data = UsefulHelper.convertModelToDataTreeTable(actorsFormat)
       this.headerColumns = UsefulHelper.convertObjectToHeaderColumns(this.data[0].data, ["actors"])
     }, 500)
   }
 
-  protected setInitialData($event: DataTreeTable<any>[]) {
+  protected setInitialData($event: DataTreeTable<any>[])  : void {
     this.data = $event;
   }
 
-  protected setEditEventTreeTable($event: Movie) {
+  protected setEditEventTreeTable($event: Movie)  : void {
     this.formGroupUpdate.patchValue({
       mid: $event.mid,
       title: $event.title,
@@ -194,13 +193,13 @@ export class ToDoMovieComponent implements OnInit, AfterViewInit {
     this.visibleFormUpdate = true
   }
 
-  protected setRemoveEventTreeTable($event: Movie) {
+  protected setRemoveEventTreeTable($event: Movie)  : void {
      this.modeDialog = 'DELETE'
      this.movieEvent = $event
      this.dynamicDialogConfirm = this.getDynamicDialogConfirm(this.modeDialog) // set alert
   }
 
-  protected setOptionalEventTreeTable($event: Movie) {
+  protected setOptionalEventTreeTable($event: Movie)  : void {
     this.movieEvent = $event
     this.tableTitleSubTable = 'Actor Table Of Movie '+this.movieEvent.mid
     this.reloadMovieIncludeActors(this.movieEvent.mid)
@@ -208,10 +207,10 @@ export class ToDoMovieComponent implements OnInit, AfterViewInit {
   }
 
   // Sub Table
-  private setupTableSubTable() {
+  private setupTableSubTable()  : void {
     setTimeout(() => {
       this.loadingSubTable = false
-      let actorsFormat: { data: Actor, subData: Actor [] | null }[] = []
+      const actorsFormat: { data: Actor, subData: Actor [] | null }[] = []
       this.movieIncludeActor.actors.forEach(actor   => (actorsFormat.push({data: actor, subData: null})) )
       this.dataSubTable = UsefulHelper.convertModelToDataTreeTable(actorsFormat)
       this.movieIncludeActor.actors[0] !== undefined // if true
@@ -220,15 +219,13 @@ export class ToDoMovieComponent implements OnInit, AfterViewInit {
     }, 500)
   }
 
-  protected setInitialDataSubTable($event: DataTreeTable<any>[]) {
+  protected setInitialDataSubTable($event: DataTreeTable<any>[]) : void {
     this.dataSubTable = $event;
   }
 
 
-
-
   // Form Update
-  private setupFormGroupUpdate() {
+  private setupFormGroupUpdate()  : void {
     this.formGroupUpdate = new FormGroup({})
     this.dynamicDialogFields = [
       new DynamicDialogField('MID', 'mid', 'e-mid', new FormControl(null, Validators.required), null, 'alpha', undefined, true),
@@ -239,11 +236,11 @@ export class ToDoMovieComponent implements OnInit, AfterViewInit {
     ]
   }
 
-  protected setInitialFormGroupUpdate($event: FormGroup) {
+  protected setInitialFormGroupUpdate($event: FormGroup)  : void {
     this.formGroupUpdate = $event
   }
 
-  protected setSubmitEventFormGroupUpdate() {
+  protected setSubmitEventFormGroupUpdate() : void {
     if (this.formGroupUpdate.valid) {
       const values = this.formGroupUpdate.value
       const movie = new Movie()
@@ -265,7 +262,7 @@ export class ToDoMovieComponent implements OnInit, AfterViewInit {
     }
   }
 
-  protected setClearEventFormGroupUpdate() {
+  protected setClearEventFormGroupUpdate() : void {
     // Reset only firstName and born & contact
     this.formGroupUpdate.patchValue({
       year: null,
@@ -275,13 +272,13 @@ export class ToDoMovieComponent implements OnInit, AfterViewInit {
     })
   }
 
-  protected setCloseEventFormGroupUpdate() {
+  protected setCloseEventFormGroupUpdate() : void {
     this.visibleFormUpdate = false
   }
 
 
   // Form Create
-  private setupFormGroupCreate() {
+  private setupFormGroupCreate()  : void {
     this.formGroupCreate = new FormGroup({})
     this.dynamicIconFields = [
       new DynamicIconField('MID', 'mid', new FormControl(null, [Validators.maxLength(4), Validators.required]), 'mid', false).setInputText(true).setPKeyFilter(null).setPlaceholder('M001'),
@@ -292,11 +289,11 @@ export class ToDoMovieComponent implements OnInit, AfterViewInit {
     ]
   }
 
-  protected setInitialFormGroupCreate($event: FormGroup) {
+  protected setInitialFormGroupCreate($event: FormGroup)  : void {
     this.formGroupCreate = $event
   }
 
-  protected setSubmitEventFormGroupCreate() {
+  protected setSubmitEventFormGroupCreate() : void {
     if (this.formGroupCreate.valid) {
       const values = this.formGroupCreate.value
       if (this.moviesId.indexOf(values['mid']) === -1) {
@@ -322,23 +319,23 @@ export class ToDoMovieComponent implements OnInit, AfterViewInit {
     }
   }
 
-  protected setClearEventFormGroupCreate() {
+  protected setClearEventFormGroupCreate() : void {
     this.formGroupCreate.reset()
   }
 
 
   // Reqs
-  private reloadMovies() {
+  private reloadMovies() : void {
     this.loading = true
     this.movieHttpService.getSelectAll().subscribe(data => (this.movies = data))
   }
 
-  private reloadMoviesId() {
+  private reloadMoviesId() : void {
     this.moviesId = []
     this.movieHttpService.getSelectAllMids().subscribe(data => (this.moviesId = data))
   }
 
-  private reloadMovieIncludeActors(mid : string) {
+  private reloadMovieIncludeActors(mid : string) : void {
     this.loadingSubTable = true
     this.visibleSubTable = true
     this.movieHttpService.getSelectOneIncludeRelationByPk(mid).subscribe(data => (this.movieIncludeActor = data))
